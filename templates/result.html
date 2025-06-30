@@ -1,0 +1,14 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おすすめカフェ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>あなたにおすすめのカフェ</h1>
+  <p>{{ message }}</p>  <!-- Flask側から渡される変数 -->
+  <a href="{{ url_for('index') }}">▶ トップに戻る</a>
+</body>
+</html>
