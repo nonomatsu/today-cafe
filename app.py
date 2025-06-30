@@ -52,5 +52,19 @@ def get_cafe_recommendation(mood):
 
     return sample_data.get(mood, None)
 
+# --- DBアクセス関数（本番用：あとで使う） ---
+# def get_cafe_recommendation(mood):
+#     conn = sqlite3.connect('db/todaycafe.db')
+#     cur = conn.cursor()
+#     cur.execute("SELECT name, description FROM cafes WHERE mood = ?", (mood,))
+#     row = cur.fetchone()
+#     conn.close()
+
+#     if row:
+#         return {'name': row[0], 'description': row[1]}
+#     else:
+#         return None
+
+
 if __name__ == '__main__':
     app.run(debug=True)
