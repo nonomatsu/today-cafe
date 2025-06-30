@@ -1,0 +1,42 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fefbf7;
+  color: #4b3832;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #6f4e37;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #6f4e37;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #a97453;
+}
+
+.main-image {
+  width: 300px;      /* 幅を300pxに固定 */
+  max-width: 90%;    /* 画面幅の90%まで縮小対応 */
+  height: auto;      /* 高さは自動調整 */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+}

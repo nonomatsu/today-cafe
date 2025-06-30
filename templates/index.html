@@ -6,8 +6,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+  <img src="{{ url_for('static', filename='img/coffee.jpg') }}" alt="コーヒーの画像" class="main-image">
+
   <h1>今日のコーヒー</h1>
-  <p>気分に合うカフェをご紹介します！</p>
+  <p>あなたの気分にぴったりのカフェをご紹介します。</p>
   <a href="{{ url_for('mood_select') }}">気分を選ぶ</a>
 </body>
 </html>
