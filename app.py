@@ -1,32 +1,66 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect, url_for, session
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = '秘密のキー'  # セッション使うために必要！
 
 # トップページ
 @app.route('/')
 def index():
+     # sessionをクリアして新しく診断開始
+    session.clear()
     return render_template('index.html')
 
 # 気分選択ページ
-@app.route('/mood')
-def mood_select():
-    return render_template('mood_select.html')
+#@app.route('/mood')
+#def mood_select():
+#    return render_template('mood_select.html')
+
+@app.route('/question/taste', methods=['GET', 'POST'])
+def question_taste():
+    if request.method == 'POST':
+        session['taste'] = request.form['taste']
+        return redirect(url_for('question_feeling'))
+    return render_template('questions/taste.html')
+
+@app.route('/question/feeling', methods=['GET', 'POST'])
+def question_feeling():
+    if request.method == 'POST':
+        session['feeling'] = request.form['feeling']
+        return redirect(url_for('question_activity'))
+    return render_template('questions/feeling.html')
+
+@app.route('/question/activity', methods=['GET', 'POST'])
+def question_activity():
+    if request.method == 'POST':
+        session['activity'] = request.form['activity']
+        return redirect(url_for('question_time'))
+    return render_template('questions/activity.html')
+
+@app.route('/question/time', methods=['GET', 'POST'])
+def question_time():
+    if request.method == 'POST':
+        session['time'] = request.form['time']
+        return redirect(url_for('result'))
+    return render_template('questions/time.html')
+
+
 
 # 結果ページ（POST対応）
-@app.route('/result', methods=['POST'])
+@app.route('/result')
+#@app.route('/result', methods=['POST'])
 def result():
     # フォームから全ての回答を取得
-    taste = request.form.get('taste')
-    feeling = request.form.get('feeling')
-    activity = request.form.get('activity')
-    time = request.form.get('time')
+    #taste = request.form.get('taste')
+    #feeling = request.form.get('feeling')
+    #activity = request.form.get('activity')
+    #time = request.form.get('time')
 
     answers = {
-        "taste": taste,
-        "feeling": feeling,
-        "activity": activity,
-        "time": time
+        'taste': session.get('taste'),
+        'feeling': session.get('feeling'),
+        'activity': session.get('activity'),
+        'time': session.get('time')
     }
 
     # DBからおすすめを取得
