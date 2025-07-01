@@ -1,0 +1,19 @@
+<!-- templates/mood_select.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>気分を選ぶ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>今の気分を教えてください</h1>
+  <form action="{{ url_for('result') }}" method="post">
+    <label><input type="radio" name="mood" value="relax"> リラックスしたい</label><br>
+    <label><input type="radio" name="mood" value="focus"> 集中したい</label><br>
+    <label><input type="radio" name="mood" value="chat"> 友達と話したい</label><br>
+    <label><input type="radio" name="mood" value="change"> 気分を変えたい</label><br><br>
+    <button type="submit">▶ おすすめを見る</button>
+  </form>
+</body>
+</html>
