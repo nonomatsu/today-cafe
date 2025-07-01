@@ -1,0 +1,95 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fefbf7;
+  color: #4b3832;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #6f4e37;
+  position: relative;
+  z-index: 2;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #6f4e37;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+a:hover {
+  background-color: #a97453;
+}
+
+.main-image {
+  width: 300px;      /* 幅を300pxに固定 */
+  max-width: 90%;    /* 画面幅の90%まで縮小対応 */
+  height: auto;      /* 高さは自動調整 */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+}
+
+.slideshow-container {
+  max-width: 400px;
+  margin: 0 auto 30px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.slide {
+  width: 100%;
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slideshow-wrapper {
+  width: 100%;
+  max-width: 600px;
+  height: 300px; /* 👈 高さを少し広く（画像に合わせて調整OK） */
+  margin: 0 auto 40px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.slideshow-track {
+  display: flex;
+  width: 400%; /* 画像4枚分 */
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slideshow-track img {
+  width: auto;       /* 幅は自動調整 */
+  max-width: 100%;   /* 親の幅を超えない */
+  height: 100%;      /* 高さは親の高さに合わせる */
+  object-fit: contain;  /* 画像全体を表示し、余白あり */
+  flex-shrink: 0;
+}
+
