@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>今日のコーヒー</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <title>カフェ診断TOP</title>
 </head>
 <body>
-  <h1>今日のコーヒー</h1>
-  <p>気分に合うカフェをご紹介します！</p>
-  <a href="{{ url_for('mood_select') }}">気分を選ぶ</a>
+    <h1>ようこそ！あなたにぴったりのカフェを診断します</h1>
+    <a href="/mood">診断スタート</a>
 </body>
 </html>
