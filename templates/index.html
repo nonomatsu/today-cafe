@@ -1,38 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>今日のコーヒー</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <title>カフェ診断TOP</title>
 </head>
 <body>
-
-  <div class="slideshow-wrapper">
-    <div class="slideshow-track" id="slideshow-track">
-      <img src="{{ url_for('static', filename='img/coffee1.jpg') }}" alt="コーヒー1">
-      <img src="{{ url_for('static', filename='img/coffee2.jpg') }}" alt="コーヒー2">
-      <img src="{{ url_for('static', filename='img/coffee3.jpg') }}" alt="コーヒー3">
-      <img src="{{ url_for('static', filename='img/coffee4.jpg') }}" alt="コーヒー4">
-    </div>
-  </div>
-
-  <!-- スライドの外にテキスト配置 -->
-  <h1>今日のコーヒー</h1>
-  <p>あなたの気分にぴったりのカフェをご紹介します。</p>
-  <a href="{{ url_for('mood_select') }}">気分を選ぶ</a>
-
-  <script>
-    let index = 0;
-    const track = document.getElementById('slideshow-track');
-    const totalSlides = track.children.length;
-
-    function slide() {
-      index = (index + 1) % totalSlides;
-      track.style.transform = `translateX(-${index * 100}%)`;
-    }
-
-    setInterval(slide, 3000);
-  </script>
-
+    <h1>ようこそ！あなたにぴったりのカフェを診断します</h1>
+    <a href="/mood">診断スタート</a>
 </body>
 </html>

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import sqlite3  # DB担当が使う想定
+import sqlite3
 
 app = Flask(__name__)
 
@@ -13,19 +13,27 @@ def index():
 def mood_select():
     return render_template('mood_select.html')
 
-# 結果ページ（POST対応＋DB処理に繋げる準備あり）
+# 結果ページ（POST対応）
 @app.route('/result', methods=['POST'])
 def result():
-    # フォームから気分を取得
-    mood = request.form.get('mood')
+    # フォームから全ての回答を取得
+    taste = request.form.get('taste')
+    feeling = request.form.get('feeling')
+    activity = request.form.get('activity')
+    time = request.form.get('time')
 
-    # --- ここからDB連携処理に渡す想定 ---
-    cafe_info = get_cafe_recommendation(mood)
-    # --- ここまでで、cafe_info におすすめ内容が入るようにしておく ---
+    answers = {
+        "taste": taste,
+        "feeling": feeling,
+        "activity": activity,
+        "time": time
+    }
 
-    # 結果をテンプレートに渡す（なければ仮のメッセージ）
+    # DBからおすすめを取得
+    cafe_info = get_cafe_recommendation(answers)
+
     if cafe_info:
-        message = f"おすすめは『{cafe_info['name']}』です：{cafe_info['description']}"
+        message = f"おすすめは『{cafe_info['name']}』です！<br>住所：{cafe_info['address']}"
     else:
         message = "おすすめが見つかりませんでした。"
 
@@ -37,33 +45,49 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 # --- DBアクセス関数（担当者が差し替えやすくする） ---
-def get_cafe_recommendation(mood):
+def get_cafe_recommendation(answers):
     """
-    mood（例: 'relax'）に応じておすすめのカフェ情報を返す。
-    将来的にDBと連携する関数。
+    answers は {'taste': '甘い', 'feeling': 'リラックスしたい', 'activity': ..., 'time': ...}
+    一番多く一致するカフェをDBから探す。
     """
-    # --- 仮のデータ（DBができるまでのダミー） ---
-    sample_data = {
-        'relax': {'name': 'カフェしずく', 'description': '静かな空間でゆったりと過ごせます。'},
-        'focus': {'name': 'カフェ・ステディ', 'description': '集中にぴったりな静音＆Wi-Fi完備。'},
-        'chat': {'name': 'カフェトーク', 'description': '会話OKのカジュアルな雰囲気。'},
-        'change': {'name': 'ブレンドラボ', 'description': 'ちょっと変わった体験型コーヒー。'}
-    }
+    conn = sqlite3.connect('inventory.db')
+    conn.row_factory = sqlite3.Row  # dict風に取り出す
+    cur = conn.cursor()
 
-    return sample_data.get(mood, None)
+    # 動的に WHERE 句を作る
+    conditions = []
+    params = []
+    for key, value in answers.items():
+        if value:
+            conditions.append("(ca.question_id = (SELECT id FROM questions WHERE key = ?) AND ca.answer_text = ?)")
+            params.extend([key, value])
 
-# --- DBアクセス関数（本番用：あとで使う） ---
-# def get_cafe_recommendation(mood):
-#     conn = sqlite3.connect('db/todaycafe.db')
-#     cur = conn.cursor()
-#     cur.execute("SELECT name, description FROM cafes WHERE mood = ?", (mood,))
-#     row = cur.fetchone()
-#     conn.close()
+    if not conditions:
+        return None  # 全部未選択の場合
 
-#     if row:
-#         return {'name': row[0], 'description': row[1]}
-#     else:
-#         return None
+    sql = f"""
+        SELECT c.id, c.name, c.address, COUNT(*) as match_count
+        FROM cafes c
+        JOIN cafe_answers ca ON c.id = ca.cafe_id
+        WHERE {' OR '.join(conditions)}
+        GROUP BY c.id
+        ORDER BY match_count DESC
+        LIMIT 1
+    """
+
+    cur.execute(sql, params)
+    row = cur.fetchone()
+    conn.close()
+
+    if row:
+        return {
+            "name": row["name"],
+            "address": row["address"],
+            "match_count": row["match_count"]
+        }
+    else:
+        return None
+
 
 
 if __name__ == '__main__':
