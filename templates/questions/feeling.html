@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>カフェ診断(2/4) - 気分</title>
+</head>
+<body>
+  <h1>あなたの気分は？</h1>
+  <form action="{{ url_for('question_activity') }}" method="post">
+    <select name="feeling" required>
+      <option value="">--選択してください--</option>
+      <option value="おしゃれに楽しみたい">おしゃれに楽しみたい</option>
+      <option value="これから頑張りたい">これから頑張りたい</option>
+      <option value="リラックスしたい">リラックスしたい</option>
+      <option value="リフレッシュしたい">リフレッシュしたい</option>
+    </select>
+    <br><br>
+    <button type="submit">次へ</button>
+  </form>
+</body>
+</html>

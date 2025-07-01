@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>カフェ診断(1/4) - 味</title>
+</head>
+<body>
+  <h1>好きな味のタイプは？</h1>
+  <form action="{{ url_for('question_feeling') }}" method="post">
+    <select name="taste" required>
+      <option value="">--選択してください--</option>
+      <option value="フルーティー">フルーティー</option>
+      <option value="苦い">苦い</option>
+      <option value="甘い">甘い</option>
+      <option value="酸っぱい">酸っぱい</option>
+    </select>
+    <br><br>
+    <button type="submit">次へ</button>
+  </form>
+</body>
+</html>
