@@ -1,19 +1,53 @@
-<!-- templates/mood_select.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>気分を選ぶ</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <title>カフェ診断</title>
 </head>
 <body>
-  <h1>今の気分を教えてください</h1>
-  <form action="{{ url_for('result') }}" method="post">
-    <label><input type="radio" name="mood" value="relax"> リラックスしたい</label><br>
-    <label><input type="radio" name="mood" value="focus"> 集中したい</label><br>
-    <label><input type="radio" name="mood" value="chat"> 友達と話したい</label><br>
-    <label><input type="radio" name="mood" value="change"> 気分を変えたい</label><br><br>
-    <button type="submit">▶ おすすめを見る</button>
-  </form>
+    <h1>カフェ診断フォーム</h1>
+    <form action="/result" method="post">
+        <label>好きな味のタイプは？</label>
+        <select name="taste">
+            <option value="">--選択してください--</option>
+            <option value="フルーティー">フルーティー</option>
+            <option value="苦い">苦い</option>
+            <option value="甘い">甘い</option>
+            <option value="酸っぱい">酸っぱい</option>
+        </select>
+        <br><br>
+
+        <label>あなたの気分は？</label>
+        <select name="feeling">
+            <option value="">--選択してください--</option>
+            <option value="おしゃれに楽しみたい">おしゃれに楽しみたい</option>
+            <option value="これから頑張りたい">これから頑張りたい</option>
+            <option value="リラックスしたい">リラックスしたい</option>
+            <option value="リフレッシュしたい">リフレッシュしたい</option>
+        </select>
+        <br><br>
+
+        <label>コーヒーを飲みながらしたいことは？</label>
+        <select name="activity">
+            <option value="">--選択してください--</option>
+            <option value="ご飯食べる">ご飯食べる</option>
+            <option value="スイーツ食べる">スイーツ食べる</option>
+            <option value="本を読む">本を読む</option>
+            <option value="音楽を聴く">音楽を聴く</option>
+        </select>
+        <br><br>
+
+        <label>一日の中でコーヒーを飲む時間帯は？</label>
+        <select name="time">
+            <option value="">--選択してください--</option>
+            <option value="朝">朝</option>
+            <option value="昼">昼</option>
+            <option value="15時頃">15時頃</option>
+            <option value="仕事の合間">仕事の合間</option>
+        </select>
+        <br><br>
+
+        <button type="submit">診断する</button>
+    </form>
 </body>
 </html>
