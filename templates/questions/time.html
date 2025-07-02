@@ -7,6 +7,11 @@
 </head>
 <body>
   <h1>一日の中でコーヒーを飲む時間帯は？</h1>
+
+   <!-- ✅ 画像を追加 -->
+  <img src="{{ url_for('static', filename='img/time-img.png') }}" alt="味のイメージ画像" class="main-image">
+  
+  
   <form action="{{ url_for('question_time') }}" method="post">
     <input type="hidden" name="time" id="timeInput">
     <button type="button" class="option-button" onclick="selectOption('朝')">朝</button>
