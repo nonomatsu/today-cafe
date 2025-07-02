@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>カフェ診断(2/4) - 気分</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>あなたの気分は？</h1>
   <form action="{{ url_for('question_feeling') }}" method="post">
-    <select name="feeling" required>
-      <option value="">--選択してください--</option>
-      <option value="おしゃれに楽しみたい">おしゃれに楽しみたい</option>
-      <option value="これから頑張りたい">これから頑張りたい</option>
-      <option value="リラックスしたい">リラックスしたい</option>
-      <option value="リフレッシュしたい">リフレッシュしたい</option>
-    </select>
-    <br><br>
-    <button type="submit">次へ</button>
+    <input type="hidden" name="feeling" id="feelingInput">
+    <button type="button" class="option-button" onclick="selectOption('おしゃれに楽しみたい')">おしゃれに楽しみたい</button>
+    <button type="button" class="option-button" onclick="selectOption('これから頑張りたい')">これから頑張りたい</button>
+    <button type="button" class="option-button" onclick="selectOption('リラックスしたい')">リラックスしたい</button>
+    <button type="button" class="option-button" onclick="selectOption('リフレッシュしたい')">リフレッシュしたい</button>
   </form>
+
+  <script>
+    function selectOption(value) {
+      document.getElementById('feelingInput').value = value;
+      document.querySelector('form').submit();
+    }
+  </script>
 </body>
 </html>

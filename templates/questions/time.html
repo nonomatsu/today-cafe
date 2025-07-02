@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>カフェ診断(4/4) - 時間帯</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>一日の中でコーヒーを飲む時間帯は？</h1>
   <form action="{{ url_for('question_time') }}" method="post">
-    <select name="time" required>
-      <option value="">--選択してください--</option>
-      <option value="朝">朝</option>
-      <option value="昼">昼</option>
-      <option value="15時頃">15時頃</option>
-      <option value="仕事の合間">仕事の合間</option>
-    </select>
-    <br><br>
-    <button type="submit">診断する</button>
+    <input type="hidden" name="time" id="timeInput">
+    <button type="button" class="option-button" onclick="selectOption('朝')">朝</button>
+    <button type="button" class="option-button" onclick="selectOption('昼')">昼</button>
+    <button type="button" class="option-button" onclick="selectOption('15時頃')">15時頃</button>
+    <button type="button" class="option-button" onclick="selectOption('仕事の合間')">仕事の合間</button>
   </form>
+
+  <script>
+    function selectOption(value) {
+      document.getElementById('timeInput').value = value;
+      document.querySelector('form').submit();
+    }
+  </script>
 </body>
 </html>

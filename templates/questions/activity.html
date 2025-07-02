@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>カフェ診断(3/4) - アクティビティ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>コーヒーを飲みながらしたいことは？</h1>
   <form action="{{ url_for('question_activity') }}" method="post">
-    <select name="activity" required>
-      <option value="">--選択してください--</option>
-      <option value="ご飯食べる">ご飯食べる</option>
-      <option value="スイーツ食べる">スイーツ食べる</option>
-      <option value="本を読む">本を読む</option>
-      <option value="音楽を聴く">音楽を聴く</option>
-    </select>
-    <br><br>
-    <button type="submit">次へ</button>
+    <input type="hidden" name="activity" id="activityInput">
+    <button type="button" class="option-button" onclick="selectOption('ご飯食べる')">ご飯食べる</button>
+    <button type="button" class="option-button" onclick="selectOption('スイーツ食べる')">スイーツ食べる</button>
+    <button type="button" class="option-button" onclick="selectOption('本を読む')">本を読む</button>
+    <button type="button" class="option-button" onclick="selectOption('音楽を聴く')">音楽を聴く</button>
   </form>
+
+  <script>
+    function selectOption(value) {
+      document.getElementById('activityInput').value = value;
+      document.querySelector('form').submit();
+    }
+  </script>
 </body>
 </html>

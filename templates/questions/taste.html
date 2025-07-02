@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>カフェ診断(1/4) - 味</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>好きな味のタイプは？</h1>
   <form action="{{ url_for('question_taste') }}" method="post">
-    <select name="taste" required>
-      <option value="">--選択してください--</option>
-      <option value="フルーティー">フルーティー</option>
-      <option value="苦い">苦い</option>
-      <option value="甘い">甘い</option>
-      <option value="酸っぱい">酸っぱい</option>
-    </select>
-    <br><br>
-    <button type="submit">次へ</button>
+    <input type="hidden" name="taste" id="tasteInput">
+    <button type="button" class="option-button" onclick="selectOption('フルーティー')">フルーティー</button>
+    <button type="button" class="option-button" onclick="selectOption('苦い')">苦い</button>
+    <button type="button" class="option-button" onclick="selectOption('甘い')">甘い</button>
+    <button type="button" class="option-button" onclick="selectOption('酸っぱい')">酸っぱい</button>
   </form>
+
+  <script>
+    function selectOption(value) {
+      document.getElementById('tasteInput').value = value;
+      document.querySelector('form').submit();
+    }
+  </script>
 </body>
 </html>
