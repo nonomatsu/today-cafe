@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+  <div class="container">
     <h1>ようこそ！あなたにぴったりのカフェを診断します</h1>
 
     <!-- ✅ 画像 -->
     <img src="{{ url_for('static', filename='img/top-img.png') }}" alt="トップ画像" class="main-image">
 
     <br>
-    <a href="{{ url_for('question_taste') }}">診断スタート</a>
+    <a href="{{ url_for('question_taste') }}" class="button-link">診断スタート</a>
+  </div>
 </body>
 </html>
