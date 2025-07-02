@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>あなたの気分は？</h1>
+
+  <!-- ✅ 画像を追加 -->
+  <img src="{{ url_for('static', filename='img/feeling-img.png') }}" alt="味のイメージ画像" class="main-image">
+  
   <form action="{{ url_for('question_feeling') }}" method="post">
     <input type="hidden" name="feeling" id="feelingInput">
     <button type="button" class="option-button" onclick="selectOption('おしゃれに楽しみたい')">おしゃれに楽しみたい</button>

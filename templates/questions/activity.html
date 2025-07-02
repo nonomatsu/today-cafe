@@ -7,6 +7,11 @@
 </head>
 <body>
   <h1>コーヒーを飲みながらしたいことは？</h1>
+
+   <!-- ✅ 画像を追加 -->
+  <img src="{{ url_for('static', filename='img/activity-img.png') }}" alt="味のイメージ画像" class="main-image">
+  
+  
   <form action="{{ url_for('question_activity') }}" method="post">
     <input type="hidden" name="activity" id="activityInput">
     <button type="button" class="option-button" onclick="selectOption('ご飯食べる')">ご飯食べる</button>

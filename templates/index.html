@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>カフェ診断TOP</title>
+    <!-- ✅ CSSの読み込み -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>ようこそ！あなたにぴったりのカフェを診断します</h1>
-    <a href="{{ url_for('question_taste') }}">診断スタート</a>  <!-- ✅ 修正ポイント -->
+
+    <!-- ✅ 画像 -->
+    <img src="{{ url_for('static', filename='img/top-img.png') }}" alt="トップ画像" class="main-image">
+
+    <br>
+    <a href="{{ url_for('question_taste') }}">診断スタート</a>
 </body>
 </html>

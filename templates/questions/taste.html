@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>好きな味のタイプは？</h1>
+
+  <!-- ✅ 画像を追加 -->
+  <img src="{{ url_for('static', filename='img/taste-img.png') }}" alt="味のイメージ画像" class="main-image">
+  
   <form action="{{ url_for('question_taste') }}" method="post">
     <input type="hidden" name="taste" id="tasteInput">
     <button type="button" class="option-button" onclick="selectOption('フルーティー')">フルーティー</button>
