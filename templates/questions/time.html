@@ -20,13 +20,16 @@
     <button type="button" class="option-button" onclick="selectOption('15時頃')">15時頃</button>
     <button type="button" class="option-button" onclick="selectOption('仕事の合間')">仕事の合間</button>
   </form>
+ </div> <!-- container の閉じタグはここ -->
 
-  <script>
-    function selectOption(value) {
-      document.getElementById('timeInput').value = value;
+ <script>
+  function selectOption(value) {
+    document.getElementById('timeInput').value = value;
+    document.body.classList.add('fade-out');
+    setTimeout(function() {
       document.querySelector('form').submit();
-    }
-  </script>
- </div>
+    }, 1500); // 1.5秒後に送信（CSSのfadeOutと合わせて）
+  }
+ </script>
 </body>
 </html>
