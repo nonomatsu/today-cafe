@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>カフェ診断TOP</title>
-    <!-- ✅ CSSの読み込み -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <title>カフェ診断TOP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="container">
@@ -14,7 +13,16 @@
     <img src="{{ url_for('static', filename='img/top-img.png') }}" alt="トップ画像" class="main-image">
 
     <br>
-    <a href="{{ url_for('question_taste') }}" class="button-link">診断スタート</a>
+    <a href="javascript:void(0);" onclick='fadeAndGo("{{ url_for("question_taste") }}")'>診断スタート</a>
   </div>
+
+  <script>
+    function fadeAndGo(url) {
+      document.body.classList.add('fade-out');
+      setTimeout(function() {
+        window.location.href = url;
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
