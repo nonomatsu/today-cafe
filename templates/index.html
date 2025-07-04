@@ -7,13 +7,13 @@
 </head>
 <body>
   <div class="container">
-    <h1>ようこそ！あなたにぴったりのカフェを診断します</h1>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" class="logo">
 
     <!-- ✅ 画像 -->
     <img src="{{ url_for('static', filename='img/top-img.png') }}" alt="トップ画像" class="main-image">
 
     <br>
-    <a href="javascript:void(0);" onclick='fadeAndGo("{{ url_for("question_taste") }}")'>診断スタート</a>
+    <a href="javascript:void(0);" onclick="fadeAndGo('{{ url_for('question_taste') }}')">診断スタート</a>
   </div>
 
   <script>

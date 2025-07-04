@@ -141,3 +141,60 @@ body.fade-out {
   }
 }
 
+.logo {
+  display: block;       /* ブロック要素にして上から下に配置 */
+  margin: 0 auto 30px;  /* 上下の余白：下に20px、中央寄せ */
+  max-width: 600px;     /* 最大幅200pxに制限 */
+  height: auto;         /* 高さは自動調整で縦横比キープ */
+}
+
+/* 結果ページ用スタイル */
+.result-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefbf7;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  color: #4b3832;
+}
+
+.result-message {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.cafe-photo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
+}
+
+.retry-link {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #6f4e37;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.retry-link:hover {
+  background-color: #a97453;
+}
+
+.result-image {
+  width: 300px;       /* 横幅300pxに固定 */
+  height: 300px;      /* 高さも300pxに固定 */
+  object-fit: cover;  /* 画像の中央部分を切り取って枠にフィット */
+  border-radius: 8px; /* 角をちょっと丸く（お好みで） */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* 軽い影をつけて立体感 */
+}
+
+

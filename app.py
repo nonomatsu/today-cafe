@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
 app = Flask(__name__)
@@ -7,14 +7,8 @@ app.secret_key = '秘密のキー'  # セッション使うために必要！
 # トップページ
 @app.route('/')
 def index():
-     # sessionをクリアして新しく診断開始
-    session.clear()
+    session.clear()  # セッションをクリアして新規スタート
     return render_template('index.html')
-
-# 気分選択ページ
-#@app.route('/mood')
-#def mood_select():
-#    return render_template('mood_select.html')
 
 @app.route('/question/taste', methods=['GET', 'POST'])
 def question_taste():
@@ -44,18 +38,9 @@ def question_time():
         return redirect(url_for('result'))
     return render_template('questions/time.html')
 
-
-
-# 結果ページ（POST対応）
+# 結果ページ
 @app.route('/result')
-#@app.route('/result', methods=['POST'])
 def result():
-    # フォームから全ての回答を取得
-    #taste = request.form.get('taste')
-    #feeling = request.form.get('feeling')
-    #activity = request.form.get('activity')
-    #time = request.form.get('time')
-
     answers = {
         'taste': session.get('taste'),
         'feeling': session.get('feeling'),
@@ -68,27 +53,28 @@ def result():
 
     if cafe_info:
         message = f"おすすめは『{cafe_info['name']}』です！<br>住所：{cafe_info['address']}"
+        cafe_photo_url = url_for('static', filename='img/cafes/' + cafe_info['photo_url']) if cafe_info.get('photo_url') else None
     else:
         message = "おすすめが見つかりませんでした。"
+        cafe_photo_url = None
 
-    return render_template('result.html', message=message)
+    return render_template('result.html', message=message, cafe_photo_url=cafe_photo_url)
 
 # エラーページ
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
-# --- DBアクセス関数（担当者が差し替えやすくする） ---
+# DBアクセス関数
 def get_cafe_recommendation(answers):
     """
     answers は {'taste': '甘い', 'feeling': 'リラックスしたい', 'activity': ..., 'time': ...}
     一番多く一致するカフェをDBから探す。
     """
     conn = sqlite3.connect('inventory.db')
-    conn.row_factory = sqlite3.Row  # dict風に取り出す
+    conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
-    # 動的に WHERE 句を作る
     conditions = []
     params = []
     for key, value in answers.items():
@@ -97,10 +83,10 @@ def get_cafe_recommendation(answers):
             params.extend([key, value])
 
     if not conditions:
-        return None  # 全部未選択の場合
+        return None
 
     sql = f"""
-        SELECT c.id, c.name, c.address, COUNT(*) as match_count
+        SELECT c.id, c.name, c.address, c.photo_url, COUNT(*) as match_count
         FROM cafes c
         JOIN cafe_answers ca ON c.id = ca.cafe_id
         WHERE {' OR '.join(conditions)}
@@ -117,12 +103,11 @@ def get_cafe_recommendation(answers):
         return {
             "name": row["name"],
             "address": row["address"],
-            "match_count": row["match_count"]
+            "match_count": row["match_count"],
+            "photo_url": row["photo_url"]
         }
     else:
         return None
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
