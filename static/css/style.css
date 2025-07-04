@@ -188,3 +188,13 @@ body.fade-out {
 .retry-link:hover {
   background-color: #a97453;
 }
+
+.result-image {
+  width: 300px;       /* 横幅300pxに固定 */
+  height: 300px;      /* 高さも300pxに固定 */
+  object-fit: cover;  /* 画像の中央部分を切り取って枠にフィット */
+  border-radius: 8px; /* 角をちょっと丸く（お好みで） */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* 軽い影をつけて立体感 */
+}
+
+

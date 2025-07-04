@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>診断結果</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
   <div class="container">
     <h1>診断結果</h1>
 
     {% if cafe_photo_url %}
-      <img src="{{ cafe_photo_url }}" alt="おすすめカフェの写真" class="result-image">
+      <img src="{{ cafe_photo_url }}" alt="おすすめカフェの写真" class="result-image" />
     {% endif %}
 
     <p>{{ message|safe }}</p>
